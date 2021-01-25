@@ -113,7 +113,6 @@ export default {
       if (!this.languageInput) {
         this.errors.push("Language requis.");
       }
-
       e.preventDefault();
     },
     sendPost() {
