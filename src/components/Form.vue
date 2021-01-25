@@ -26,16 +26,7 @@
     >
   </p>
 
-    <p>
-    <label for="tagsInput" class="form-label">Tags</label>
-    <input
-      id="tagsInput"
-      v-model="tagsInput"
-      type="text"
-      name="tagsInput"
-      class="form-control"
-    >
-  </p>
+
 
     <p>
     <label for="messageInput" class="form-label">Message</label>
@@ -44,6 +35,17 @@
       v-model="messageInput"
       type="text"
       name="messageInput"
+      class="form-control"
+    >
+  </p>
+
+      <p>
+    <label for="tagsInput" class="form-label">Tags</label>
+    <input
+      id="tagsInput"
+      v-model="tagsInput"
+      type="text"
+      name="tagsInput"
       class="form-control"
     >
   </p>
@@ -77,7 +79,7 @@
 
 <script>
 import axios from "axios";
-import moment from 'moment'
+import moment from "moment";
 
 export default {
   name: "Form",
@@ -118,21 +120,23 @@ export default {
       e.preventDefault();
     },
     sendPost() {
-      let message = {          
-          subject: this.subjectInput,
-          tags: this.tagsInput,
-          message: this.messageInput,
-          language: this.languageInput,
-          date: moment().format('DD/MM/YYYY hh:mm')
-          };
+      let message = {
+        subject: this.subjectInput,
+        tags: this.tagsInput,
+        message: this.messageInput,
+        language: this.languageInput,
+        date: moment().format("DD/MM/YYYY hh:mm"),
+      };
       axios
-        .post("https://crudcrud.com/api/391a25ba7d4f49afbcf2abf7b654f28a/message", message)
-        .then(
-          console.log(message)
+        .post(
+          "https://crudcrud.com/api/391a25ba7d4f49afbcf2abf7b654f28a/message",
+          message
         )
+        .then(alert('Message envoyé'))
         .catch((error) => {
           console.log(error);
         });
+      location.reload();
     },
   },
 };
