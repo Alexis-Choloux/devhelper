@@ -77,6 +77,8 @@
 
 <script>
 import axios from "axios";
+import moment from 'moment'
+
 export default {
   name: "Form",
   data() {
@@ -116,16 +118,18 @@ export default {
       e.preventDefault();
     },
     sendPost() {
-      axios
-        .post("https://crudcrud.com/api/391a25ba7d4f49afbcf2abf7b654f28a", {
+      let message = {          
           subject: this.subjectInput,
           tags: this.tagsInput,
           message: this.messageInput,
           language: this.languageInput,
-        })
-        .then((response) => {
-          console.log(response);
-        })
+          date: moment().format('DD/MM/YYYY hh:mm')
+          };
+      axios
+        .post("https://crudcrud.com/api/391a25ba7d4f49afbcf2abf7b654f28a/message", message)
+        .then(
+          console.log(message)
+        )
         .catch((error) => {
           console.log(error);
         });
