@@ -2,9 +2,8 @@
 <div class="row">
 <div class="col-md-4 offset-md-4">
 <form
-  id="app"
+  id="form"
   @submit="checkForm"
-  action="https://vuejs.org/"
   method="post"
 >
 
@@ -15,62 +14,80 @@
     </ul>
   </p>
 
-  <p>
-    <label for="subjectInput" class="form-label">Sujet</label>
+<div class="row mb-2">
+    <input
+      id="nameInput"
+      v-model="nameInput"
+      type="text"
+      name="nameInput"
+      class="form-control"
+      placeholder="Pseudo"
+    >
+</div>
+
+    <input
+      id="cityInput"
+      v-model="cityInput"
+      type="text"
+      name="cityInput"
+      class="form-control"
+      placeholder="Ville"
+    >
+
+    <input
+      id="countryInput"
+      v-model="countryInput"
+      type="text"
+      name="countryInput"
+      class="form-control"
+      placeholder="Pays"
+    >
+
     <input
       id="subjectInput"
       v-model="subjectInput"
       type="text"
       name="subjectInput"
       class="form-control"
+      placeholder="Sujet"
     >
-  </p>
 
-
-
-    <p>
-    <label for="messageInput" class="form-label">Message</label>
     <input
       id="messageInput"
       v-model="messageInput"
       type="text"
       name="messageInput"
       class="form-control"
+      placeholder="Message"
     >
-  </p>
 
-      <p>
-    <label for="tagsInput" class="form-label">Tags</label>
     <input
       id="tagsInput"
       v-model="tagsInput"
       type="text"
       name="tagsInput"
       class="form-control"
+      placeholder="Tags"
     >
-  </p>
 
-  <p>
-    <label for="languageInput" class="form-label">Language / Framework</label>
     <select
+      class="form-select" 
+      aria-label="Default select example" 
       id="languageInput"
       v-model="languageInput"
       name="languageInput"
-      class="form-select"
     >
-      <option>HTML/CSS</option>
-      <option>Javascript</option>
-      <option>PHP</option>
+      <option selected>Séléctionnez le language</option>
+      <option value="1">HTML/CSS</option>
+      <option value="2">Javascript</option>
+      <option value="3">PHP</option>
     </select>
-  </p>
 
-  <p>
     <input
       type="submit"
       value="Submit" 
       class="btn btn-danger"
     >
-  </p>
 
 </form>
 </div>
@@ -86,6 +103,9 @@ export default {
   data() {
     return {
       errors: [],
+      nameInput: null,
+      cityInput: null,
+      countryInput: null,
       subjectInput: null,
       tagsInput: null,
       messageInput: null,
@@ -94,7 +114,12 @@ export default {
   },
   methods: {
     checkForm: function (e) {
+      e.preventDefault();
+
       if (
+        this.nameInput &&
+        this.cityInput &&
+        this.countryInput &&
         this.subjectInput &&
         this.tagsInput &&
         this.messageInput &&
@@ -105,8 +130,14 @@ export default {
 
       this.errors = [];
 
-      if (!this.subjectInput) {
-        this.errors.push("Sujet requis.");
+      if (!this.nameInput) {
+        this.errors.push("Pseudo requis.");
+      }
+      if (!this.cityInput) {
+        this.errors.push("Ville requis.");
+      }
+      if (!this.countryInput) {
+        this.errors.push("Pays requis.");
       }
       if (!this.tagsInput) {
         this.errors.push("Tags requis.");
@@ -117,10 +148,13 @@ export default {
       if (!this.languageInput) {
         this.errors.push("Language requis.");
       }
-      e.preventDefault();
     },
+
     sendPost() {
       let message = {
+        name: this.nameInput,
+        city: this.cityInput,
+        country: this.countryInput,
         subject: this.subjectInput,
         tags: this.tagsInput,
         message: this.messageInput,
@@ -129,14 +163,15 @@ export default {
       };
       axios
         .post(
-          "https://crudcrud.com/api/391a25ba7d4f49afbcf2abf7b654f28a/message",
+          "https://crudcrud.com/api/2ff714c65afc4a3387344703fb4135cc/message",
           message
         )
-        .then(alert('Message envoyé'))
+        .then(() => {
+          location.reload();
+        })
         .catch((error) => {
           console.log(error);
         });
-      location.reload();
     },
   },
 };
