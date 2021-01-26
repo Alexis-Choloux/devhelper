@@ -1,12 +1,36 @@
 <template>
 <div class="row">
-<div class="col-md-4 offset-md-4">
-<form
-  id="form"
-  @submit="checkForm"
-  method="post"
->
 
+  <!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  Launch demo modal
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+
+            <form
+              id="form"
+              @submit="checkForm"
+              method="post"
+            >
+
+      <div class="modal-header">
+        <input
+          id="subjectInput"
+          v-model="subjectInput"
+          type="text"
+          name="subjectInput"
+          class="form-control"
+          placeholder="Sujet"
+        >        
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+
+  <div class="modal-body">
   <p v-if="errors.length">
     <b>S'il vous plait, corriger les erreurs suivantes :</b>
     <ul>
@@ -43,23 +67,14 @@
       placeholder="Pays"
     >
 
-    <input
-      id="subjectInput"
-      v-model="subjectInput"
-      type="text"
-      name="subjectInput"
-      class="form-control"
-      placeholder="Sujet"
-    >
-
-    <input
+    <textarea
       id="messageInput"
       v-model="messageInput"
       type="text"
       name="messageInput"
       class="form-control"
       placeholder="Message"
-    >
+    ></textarea>
 
     <input
       id="tagsInput"
@@ -78,19 +93,27 @@
       name="languageInput"
     >
       <option selected>Séléctionnez le language</option>
-      <option value="1">HTML/CSS</option>
-      <option value="2">Javascript</option>
-      <option value="3">PHP</option>
-    </select>
+      <option value="HTML/CSS">HTML/CSS</option>
+      <option value="Javascript">Javascript</option>
+      <option value="PHP">PHP</option>
+    </select>      
 
-    <input
+    </div>
+
+
+      <div class="modal-footer">
+        <input
       type="submit"
       value="Submit" 
       class="btn btn-danger"
     >
+      </div>
+          </form>
 
-</form>
+    </div>
+  </div>
 </div>
+
 </div>
 </template>
 
@@ -163,7 +186,7 @@ export default {
       };
       axios
         .post(
-          "https://crudcrud.com/api/2ff714c65afc4a3387344703fb4135cc/message",
+          "https://crudcrud.com/api/8c3fd2029f064dd58dc07ae6819c5ee4/message",
           message
         )
         .then(() => {
@@ -176,3 +199,7 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+
+</style>
