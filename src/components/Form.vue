@@ -76,7 +76,6 @@
     <textarea
       id="messageInput"
       v-model="messageInput"
-      type="text"
       name="messageInput"
       class="form-control"
       placeholder="Message"

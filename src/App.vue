@@ -9,7 +9,7 @@
 
       <div class="row">
         <div
-          class="col-md-6 offset-md-3"
+          class="col-md-9 offset-md-3"
           v-for="message in messages"
           :key="message.id"
         >
@@ -76,5 +76,12 @@ export default {
 .modal-dialog input,
 .modal-dialog textarea {
   border: none;
+}
+
+.routerLink {
+  text-decoration: none;
+  color: black;
+}.routerLink:hover {
+  color: black;
 }
 </style>

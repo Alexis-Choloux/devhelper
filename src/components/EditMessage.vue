@@ -76,11 +76,9 @@
               </div>
             </div>
 
-
             <textarea
               id="messageInput"
               v-model="content"
-              type="text"
               name="messageInput"
               class="form-control"
             ></textarea>
