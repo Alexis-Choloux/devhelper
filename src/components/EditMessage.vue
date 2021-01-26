@@ -4,17 +4,17 @@
     type="button"
     class="btn btn-light btn-sm"
     data-bs-toggle="modal"
-    data-bs-target="#editModal"
+    :data-bs-target="'#editModal' + message._id"
   >
-    <i class="fas fa-edit"></i>
+    <i class="fas fa-pen fa-2x"></i>
   </button>
 
   <!-- Modal -->
   <div
     class="modal fade"
-    id="editModal"
+    :id="'editModal' + message._id"
     tabindex="-1"
-    aria-labelledby="editModalLabel"
+    :aria-labelledby="'editModalLabel' + message._id"
     aria-hidden="true"
   >
     <div class="modal-dialog modal-xl">
@@ -45,6 +45,7 @@
         </p>
 
             <div class="row mb-2">
+              <div class="col-4">
               <input
                 id="nameInput"
                 v-model="name"
@@ -52,8 +53,9 @@
                 name="nameInput"
                 class="form-control"
               />
-            </div>
+              </div>
 
+              <div class="col-4">
             <input
               id="cityInput"
               v-model="city"
@@ -61,7 +63,9 @@
               name="cityInput"
               class="form-control"
             />
+              </div>
 
+              <div class="col-4">
             <input
               id="countryInput"
               v-model="country"
@@ -69,6 +73,9 @@
               name="countryInput"
               class="form-control"
             />
+              </div>
+            </div>
+
 
             <textarea
               id="messageInput"
@@ -85,21 +92,40 @@
               name="tagsInput"
               class="form-control"
             />
-
-            <select  v-model="languageInput" class="form-select" aria-label="Default select example">
-              <option value="HTML/CSS">HTML/CSS</option>
-              <option value="Javascript">Javascript</option>
-              <option value="PHP">PHP</option>
-            </select>
           </div>
 
           <div class="modal-footer">
-            <input type="submit" value="Submit" class="btn btn-danger" />
+            <input type="submit" value="Modifier" class="btn btn-primary btn-lg" />
           </div>
         </form>
       </div>
     </div>
   </div>
+
+
+  <!-- Button trigger modal -->
+<button type="button" class="btn btn-light btn-sm" data-bs-toggle="modal" :data-bs-target="'#deleteModal' + message._id">
+  <i class="fas fa-trash fa-2x"></i>
+</button>
+
+<!-- Modal -->
+<div class="modal fade" :id="'deleteModal' + message._id" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteModalLabel">Suppression</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Etes-vous sûr de vouloir prosséder à la suppression de ce message ?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Fermer</button>
+        <button type="button" class="btn btn-danger" @click="deletePost()">Supprimer</button>
+      </div>
+    </div>
+  </div>
+</div>
 </template>
 
 <script>
@@ -118,7 +144,6 @@ export default {
       subject: this.message.subject,
       tags: this.message.tags,
       content: this.message.message,
-      languageInput: null,
     };
   },
     methods: {
@@ -131,8 +156,7 @@ export default {
           this.country &&
           this.subject &&
           this.tags &&
-          this.content &&
-          this.languageInput
+          this.content
         ) {
           this.updatePost();
         }
@@ -154,9 +178,6 @@ export default {
         if (!this.content) {
           this.errors.push("Message requis.");
         }
-        if (!this.language) {
-          this.errors.push("Language requis.");
-        }
       },
       updatePost() {
         let message = {
@@ -166,12 +187,11 @@ export default {
           subject: this.subject,
           tags: this.tags,
           message: this.content,
-          language: this.languageInput,
           date: moment().format("DD/MM/YYYY hh:mm"),
         };
         axios
           .put(
-            "https://crudcrud.com/api/8c3fd2029f064dd58dc07ae6819c5ee4/message/" + this.message._id,
+            "https://crudcrud.com/api/874b1e2002ec449b88c0e3b1fa1fb018/message/" + this.message._id,
             message
           )
           .then(() => {
@@ -181,6 +201,18 @@ export default {
             console.log(error);
           });
       },
+      deletePost() {
+          axios
+          .delete(
+            "https://crudcrud.com/api/874b1e2002ec449b88c0e3b1fa1fb018/message/" + this.message._id
+          )
+          .then(() => {
+            location.reload();
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
     },
 };
 </script>

@@ -1,11 +1,24 @@
 <template>
   <div class="container">
-    <Form />
-
-    <div class="row">
-      <div class="col-md-6 offset-md-3" v-for="message in messages" :key="message.id">
-        <ShowMessages :message="message" />
+    <div v-if="$route.path == '/'">
+      <div class="row">
+        <div class="col-md-3 text-center">
+          <Form />
+        </div>
       </div>
+
+      <div class="row">
+        <div
+          class="col-md-6 offset-md-3"
+          v-for="message in messages"
+          :key="message.id"
+        >
+          <ShowMessages :message="message" />
+        </div>
+      </div>
+    </div>
+    <div v-else>
+      <router-view :key="$route.fullPath"></router-view>
     </div>
   </div>
 </template>
@@ -30,7 +43,7 @@ export default {
     getMessages() {
       axios
         .get(
-          "https://crudcrud.com/api/8c3fd2029f064dd58dc07ae6819c5ee4/message"
+          "https://crudcrud.com/api/874b1e2002ec449b88c0e3b1fa1fb018/message"
         )
         .then((response) => {
           this.messages = response.data;
@@ -57,10 +70,11 @@ export default {
 .modal-dialog {
   position: fixed;
   margin-left: 15%;
-  bottom: 0;
+  bottom: -30px;
   width: 70%;
 }
-.modal-dialog input, .modal-dialog textarea {
+.modal-dialog input,
+.modal-dialog textarea {
   border: none;
 }
 </style>

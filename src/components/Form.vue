@@ -1,9 +1,8 @@
 <template>
-<div class="row">
 
   <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-  Launch demo modal
+<button type="button" class="btn btn-primary rounded-pill" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  Nouveau POST
 </button>
 
 <!-- Modal -->
@@ -39,6 +38,7 @@
   </p>
 
 <div class="row mb-2">
+  <div class="col-4">
     <input
       id="nameInput"
       v-model="nameInput"
@@ -47,8 +47,9 @@
       class="form-control"
       placeholder="Pseudo"
     >
-</div>
+  </div>
 
+  <div class="col-4">
     <input
       id="cityInput"
       v-model="cityInput"
@@ -57,7 +58,9 @@
       class="form-control"
       placeholder="Ville"
     >
+  </div>
 
+  <div class="col-4">
     <input
       id="countryInput"
       v-model="countryInput"
@@ -66,6 +69,9 @@
       class="form-control"
       placeholder="Pays"
     >
+  </div>
+    </div>
+
 
     <textarea
       id="messageInput"
@@ -83,37 +89,21 @@
       name="tagsInput"
       class="form-control"
       placeholder="Tags"
-    >
-
-    <select
-      class="form-select" 
-      aria-label="Default select example" 
-      id="languageInput"
-      v-model="languageInput"
-      name="languageInput"
-    >
-      <option selected>Séléctionnez le language</option>
-      <option value="HTML/CSS">HTML/CSS</option>
-      <option value="Javascript">Javascript</option>
-      <option value="PHP">PHP</option>
-    </select>      
-
+    > 
     </div>
 
 
       <div class="modal-footer">
         <input
       type="submit"
-      value="Submit" 
-      class="btn btn-danger"
+      value="Poster" 
+      class="btn btn-primary btn-lg"
     >
       </div>
           </form>
 
     </div>
   </div>
-</div>
-
 </div>
 </template>
 
@@ -132,7 +122,6 @@ export default {
       subjectInput: null,
       tagsInput: null,
       messageInput: null,
-      languageInput: null,
     };
   },
   methods: {
@@ -145,8 +134,7 @@ export default {
         this.countryInput &&
         this.subjectInput &&
         this.tagsInput &&
-        this.messageInput &&
-        this.languageInput
+        this.messageInput
       ) {
         this.sendPost();
       }
@@ -168,9 +156,6 @@ export default {
       if (!this.messageInput) {
         this.errors.push("Message requis.");
       }
-      if (!this.languageInput) {
-        this.errors.push("Language requis.");
-      }
     },
 
     sendPost() {
@@ -181,12 +166,11 @@ export default {
         subject: this.subjectInput,
         tags: this.tagsInput,
         message: this.messageInput,
-        language: this.languageInput,
         date: moment().format("DD/MM/YYYY hh:mm"),
       };
       axios
         .post(
-          "https://crudcrud.com/api/8c3fd2029f064dd58dc07ae6819c5ee4/message",
+          "https://crudcrud.com/api/874b1e2002ec449b88c0e3b1fa1fb018/message",
           message
         )
         .then(() => {
