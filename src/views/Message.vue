@@ -4,19 +4,79 @@
       <div class="col-md-9 offset-md-3">
         <div class="card text-dark bg-light mb-3">
           <div class="card-header text-start">
-              <div class="d-flex">
-                <h2>
-                  {{ message.name }}
-                </h2>
-                <EditMessage :message="message" />
+            <div class="d-flex">
+              <h2>
+                {{ message.name }}
+              </h2>
+              <router-link
+                :to="{ path: '/editmessage/' + message._id }"
+                class="routerLink"
+              >
+                <i class="fas fa-pen fa-2x"></i>
+              </router-link>
+
+              <div>
+                <button
+                  type="button"
+                  class="btn btn-light btn-sm"
+                  data-bs-toggle="modal"
+                  :data-bs-target="'#deleteModal' + message._id"
+                >
+                  <i class="fas fa-trash fa-2x"></i>
+                </button>
+
+                <!-- Modal -->
+                <div
+                  class="modal fade"
+                  :id="'deleteModal' + message._id"
+                  tabindex="-1"
+                  aria-labelledby="deleteModalLabel"
+                  aria-hidden="true"
+                >
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="deleteModalLabel">
+                          Suppression
+                        </h5>
+                        <button
+                          type="button"
+                          class="btn-close"
+                          data-bs-dismiss="modal"
+                          aria-label="Close"
+                        ></button>
+                      </div>
+                      <div class="modal-body">
+                        Etes-vous sûr de vouloir prosséder à la suppression de
+                        ce message ?
+                      </div>
+                      <div class="modal-footer">
+                        <button
+                          type="button"
+                          class="btn btn-outline-secondary"
+                          data-bs-dismiss="modal"
+                        >
+                          Fermer
+                        </button>
+                        <button
+                          type="button"
+                          class="btn btn-danger"
+                          @click="deletePost()"
+                        >
+                          Supprimer
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <p>{{ message.city }}  {{ message.country }}</p>
+            </div>
+            <p>{{ message.city }} {{ message.country }}</p>
           </div>
           <div class="card-body">
             <div class="row text-start">
-
-              <p>{{ message.subject }}  {{ message.date }}</p>
-              <p>{{ message.message }}</p>
+              <p>{{ message.subject }} {{ message.date }}</p>
+              <p>{{ message.content }}</p>
               <p>{{ message.tags }}</p>
             </div>
           </div>
@@ -28,13 +88,10 @@
 
 <script>
 import axios from "axios";
-import EditMessage from "@/components/EditMessage";
 
 export default {
   name: "Message",
-  components: {
-    EditMessage,
-  },
+
   data() {
     return {
       id: this.$route.params.id,
@@ -45,12 +102,27 @@ export default {
     getMessage() {
       axios
         .get(
-          "https://crudcrud.com/api/874b1e2002ec449b88c0e3b1fa1fb018/message/" +
+          "https://crudcrud.com/api/5770db48a9244d4c879618d33c4dcd6f/message/" +
             this.id
         )
         .then((response) => {
           this.message = response.data;
-          console.log(this.message);
+        })
+        .catch(() => {
+          console.log("erreur");
+        });
+    },
+    deletePost() {
+      axios
+        .delete(
+          "https://crudcrud.com/api/5770db48a9244d4c879618d33c4dcd6f/message/" +
+            this.message._id
+        )
+        .then(() => {
+          this.$router.push({ name: 'Home' });
+        })
+        .catch((error) => {
+          console.log(error);
         });
     },
   },

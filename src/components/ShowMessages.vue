@@ -13,14 +13,14 @@
             </h2>
           </router-link>
 
-          <EditMessage :message="message" />
+          <EditMessageModal :message="message" />
         </div>
         <router-link
           :to="{ path: '/message/' + message._id }"
           class="routerLink"
         >
           <p>{{ message.name }}</p>
-          <p>{{ message.message }}</p>
+          <p>{{ message.content }}</p>
           <p>{{ message.tags }}</p>
         </router-link>
       </div>
@@ -29,13 +29,14 @@
 </template>
 
 <script>
-import EditMessage from "./EditMessage";
+import EditMessageModal from "./EditMessageModal";
 
 export default {
   name: "GetMessages",
   props: ["message"],
   components: {
-    EditMessage,
+    EditMessageModal,
   },
+
 };
 </script>

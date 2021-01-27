@@ -1,5 +1,7 @@
 import { createWebHistory, createRouter } from "vue-router";
 import Message from "@/views/Message.vue";
+import EditMessage from "@/views/EditMessage.vue";
+import App from "@/App.vue";
 
 const routes = [
   {
@@ -7,6 +9,16 @@ const routes = [
     name: "Message",
     component: Message,
   },
+  {
+    path: "/editmessage/:id",
+    name: "EditMessage",
+    component: EditMessage,
+  },
+  {
+    path: "/",
+    name: "Home",
+    component: App,
+  }
 ];
 
 const router = createRouter({

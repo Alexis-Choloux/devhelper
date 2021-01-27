@@ -43,11 +43,10 @@ export default {
     getMessages() {
       axios
         .get(
-          "https://crudcrud.com/api/874b1e2002ec449b88c0e3b1fa1fb018/message"
+          "https://crudcrud.com/api/5770db48a9244d4c879618d33c4dcd6f/message"
         )
         .then((response) => {
           this.messages = response.data;
-          console.log(this.messages);
         });
     },
   },

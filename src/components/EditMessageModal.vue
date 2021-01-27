@@ -27,7 +27,8 @@
               type="text"
               name="subjectInput"
               class="form-control"
-            />          <button
+            />          
+            <button
             type="button"
             class="btn-close"
             data-bs-dismiss="modal"
@@ -46,6 +47,8 @@
 
             <div class="row mb-2">
               <div class="col-4">
+                  <p>{{ name }}</p>
+
               <input
                 id="nameInput"
                 v-model="name"
@@ -90,6 +93,7 @@
               name="tagsInput"
               class="form-control"
             />
+            
           </div>
 
           <div class="modal-footer">
@@ -131,7 +135,7 @@ import axios from "axios";
 import moment from "moment";
 
 export default {
-  name: "EditMessage",
+  name: "EditMessageModal",
   props: ["message"],
   data() {
     return {
@@ -141,10 +145,11 @@ export default {
       country: this.message.country,
       subject: this.message.subject,
       tags: this.message.tags,
-      content: this.message.message,
+      content: this.message.content,
     };
   },
     methods: {
+
       checkForm: function (e) {
         e.preventDefault();
 
@@ -184,12 +189,12 @@ export default {
           country: this.country,
           subject: this.subject,
           tags: this.tags,
-          message: this.content,
+          content: this.content,
           date: moment().format("DD/MM/YYYY hh:mm"),
         };
         axios
           .put(
-            "https://crudcrud.com/api/874b1e2002ec449b88c0e3b1fa1fb018/message/" + this.message._id,
+            "https://crudcrud.com/api/5770db48a9244d4c879618d33c4dcd6f/message/" + this.message._id,
             message
           )
           .then(() => {
@@ -202,7 +207,7 @@ export default {
       deletePost() {
           axios
           .delete(
-            "https://crudcrud.com/api/874b1e2002ec449b88c0e3b1fa1fb018/message/" + this.message._id
+            "https://crudcrud.com/api/5770db48a9244d4c879618d33c4dcd6f/message/" + this.message._id
           )
           .then(() => {
             location.reload();
@@ -212,6 +217,10 @@ export default {
           });
       }
     },
+      created() {
+    console.log(this.message);
+    console.log(this.message.name);
+  },
 };
 </script>
 
