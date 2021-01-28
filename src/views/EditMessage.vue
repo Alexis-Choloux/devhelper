@@ -1,65 +1,79 @@
 <template>
-  <form id="form" @submit="checkForm" method="post">
-    <div class="card">
-      <div class="card-header">
-        <div class="row">
-          <div class="col-4">
+  <div class="row text-start">
+    <router-link :to="{ path: '/message/' + this.$route.params.id }" class="routerLink">
+      <button class="btn btn-outline-info rounded-pill return">
+        <i class="fas fa-hiking fa-flip-horizontal"></i>Retour
+      </button>
+    </router-link>
+  </div>
+
+  <div class="row mt-5">
+    <form id="form" @submit="checkForm" method="post">
+      <div class="card">
+        <div class="card-header">
+          <div class="row">
+            <div class="col-4">
+              <input
+                id="subjectInput"
+                v-model="name"
+                type="text"
+                name="subjectInput"
+                class="form-control"
+              />
+            </div>
+            <div class="col-4">
+              <input
+                id="cityInput"
+                v-model="city"
+                type="text"
+                name="cityInput"
+                class="form-control"
+              />
+            </div>
+            <div class="col-4">
+              <input
+                id="countryInput"
+                v-model="country"
+                type="text"
+                name="countryInput"
+                class="form-control"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-title">
             <input
               id="subjectInput"
-              v-model="name"
+              v-model="subject"
               type="text"
               name="subjectInput"
               class="form-control"
             />
-          </div>
-          <div class="col-4">
+            <textarea
+              id="messageInput"
+              v-model="content"
+              name="messageInput"
+              class="form-control"
+            ></textarea>
             <input
-              id="cityInput"
-              v-model="city"
+              id="tagsInput"
+              v-model="tags"
               type="text"
-              name="cityInput"
+              name="tagsInput"
               class="form-control"
             />
           </div>
-          <div class="col-4">
-            <input
-              id="countryInput"
-              v-model="country"
-              type="text"
-              name="countryInput"
-              class="form-control"
-            />
-          </div>
-        </div>
-      </div>
-      <div class="card-body">
-        <div class="card-title">
+          <div class="card-text"></div>
           <input
-            id="subjectInput"
-            v-model="subject"
-            type="text"
-            name="subjectInput"
-            class="form-control"
-          />
-          <textarea
-            id="messageInput"
-            v-model="content"
-            name="messageInput"
-            class="form-control"
-          ></textarea>
-          <input
-            id="tagsInput"
-            v-model="tags"
-            type="text"
-            name="tagsInput"
-            class="form-control"
+            type="submit"
+            value="Modifier"
+            class="btn btn-primary btn-lg"
           />
         </div>
-        <div class="card-text"></div>
-        <input type="submit" value="Modifier" class="btn btn-primary btn-lg" />
       </div>
-    </div>
-  </form>
+    </form>
+  </div>
 </template>
 
 <script>
@@ -84,7 +98,7 @@ export default {
     getMessage() {
       axios
         .get(
-          "https://crudcrud.com/api/4bbc5a6a11e247dfabd43c5c58b8afcf/message/" +
+          "https://crudcrud.com/api/5b326cc2e0bc4b2abdffca8791049cc9/message/" +
             this.id
         )
         .then((response) => {
@@ -144,12 +158,12 @@ export default {
       };
       axios
         .put(
-          "https://crudcrud.com/api/5770db48a9244d4c879618d33c4dcd6f/message/" +
+          "https://crudcrud.com/api/5b326cc2e0bc4b2abdffca8791049cc9/message/" +
             this.$route.params.id,
           message
         )
         .then(() => {
-          this.$router.push({ name: 'Message', params: this.$route.params.id });
+          this.$router.push({ name: "Message", params: this.$route.params.id });
         })
         .catch((error) => {
           console.log(error);

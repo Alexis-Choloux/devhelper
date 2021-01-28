@@ -43,7 +43,7 @@ export default {
     getMessages() {
       axios
         .get(
-          "https://crudcrud.com/api/5770db48a9244d4c879618d33c4dcd6f/message"
+          "https://crudcrud.com/api/5b326cc2e0bc4b2abdffca8791049cc9/message"
         )
         .then((response) => {
           this.messages = response.data;
@@ -82,5 +82,14 @@ export default {
   color: black;
 }.routerLink:hover {
   color: black;
+}
+
+.return {
+  width: 150px;
+  font-size: 20px;
+}
+.return i {
+  margin-right: 20px;
+  font-size: 30px;
 }
 </style>

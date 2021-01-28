@@ -194,7 +194,7 @@ export default {
         };
         axios
           .put(
-            "https://crudcrud.com/api/5770db48a9244d4c879618d33c4dcd6f/message/" + this.message._id,
+            "https://crudcrud.com/api/5b326cc2e0bc4b2abdffca8791049cc9/message/" + this.message._id,
             message
           )
           .then(() => {
@@ -207,7 +207,7 @@ export default {
       deletePost() {
           axios
           .delete(
-            "https://crudcrud.com/api/5770db48a9244d4c879618d33c4dcd6f/message/" + this.message._id
+            "https://crudcrud.com/api/5b326cc2e0bc4b2abdffca8791049cc9/message/" + this.message._id
           )
           .then(() => {
             location.reload();

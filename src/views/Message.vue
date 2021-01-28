@@ -1,5 +1,15 @@
 <template>
   <div class="container">
+
+    <div class="row text-start">
+      <router-link
+        :to="{ path: '/' }"
+        class="routerLink"
+      >
+        <button class="btn btn-outline-info rounded-pill return"><i class="fas fa-hiking fa-flip-horizontal"></i>Retour</button>
+      </router-link>
+    </div>
+
     <div class="row">
       <div class="col-md-9 offset-md-3">
         <div class="card text-dark bg-light mb-3">
@@ -102,7 +112,7 @@ export default {
     getMessage() {
       axios
         .get(
-          "https://crudcrud.com/api/5770db48a9244d4c879618d33c4dcd6f/message/" +
+          "https://crudcrud.com/api/5b326cc2e0bc4b2abdffca8791049cc9/message/" +
             this.id
         )
         .then((response) => {
@@ -115,11 +125,11 @@ export default {
     deletePost() {
       axios
         .delete(
-          "https://crudcrud.com/api/5770db48a9244d4c879618d33c4dcd6f/message/" +
+          "https://crudcrud.com/api/5b326cc2e0bc4b2abdffca8791049cc9/message/" +
             this.message._id
         )
         .then(() => {
-          this.$router.push({ name: 'Home' });
+          window.location.href = 'http://localhost:8080/';
         })
         .catch((error) => {
           console.log(error);
@@ -131,3 +141,7 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+
+</style>
