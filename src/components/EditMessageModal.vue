@@ -47,7 +47,6 @@
 
             <div class="row mb-2">
               <div class="col-4">
-                  <p>{{ name }}</p>
 
               <input
                 id="nameInput"
@@ -86,13 +85,38 @@
               class="form-control"
             ></textarea>
 
-            <input
-              id="tagsInput"
-              v-model="tags"
-              type="text"
-              name="tagsInput"
-              class="form-control"
-            />
+
+            <div class="row">
+              <div class="col-6">
+                <input
+                  id="tagsInput"
+                  v-model="tags"
+                  type="text"
+                  name="tagsInput"
+                  class="form-control"
+                > 
+              </div>
+
+              <div class="col-6" v-if="picture">
+                <input
+                  id="picInput"
+                  v-model="picture"
+                  type="text"
+                  name="picInput"
+                  class="form-control"
+                > 
+              </div>
+              <div class="col-6" v-else>
+                <input
+                  id="picInput"
+                  v-model="picture"
+                  type="text"
+                  name="picInput"
+                  class="form-control"
+                  placeholder="Collez, ici, l'url de votre photo"
+                > 
+              </div>
+            </div>
             
           </div>
 
@@ -146,6 +170,7 @@ export default {
       subject: this.message.subject,
       tags: this.message.tags,
       content: this.message.content,
+      picture: this.message.picture,
     };
   },
     methods: {
@@ -190,6 +215,7 @@ export default {
           subject: this.subject,
           tags: this.tags,
           content: this.content,
+          picture: this.picture,
           date: moment().format("DD/MM/YYYY hh:mm"),
         };
         axios

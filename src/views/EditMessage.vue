@@ -56,13 +56,37 @@
               name="messageInput"
               class="form-control"
             ></textarea>
-            <input
-              id="tagsInput"
-              v-model="tags"
-              type="text"
-              name="tagsInput"
-              class="form-control"
-            />
+            <div class="row">
+              <div class="col-6">
+                <input
+                  id="tagsInput"
+                  v-model="tags"
+                  type="text"
+                  name="tagsInput"
+                  class="form-control"
+                > 
+              </div>
+
+              <div class="col-6" v-if="picture">
+                <input
+                  id="picInput"
+                  v-model="picture"
+                  type="text"
+                  name="picInput"
+                  class="form-control"
+                > 
+              </div>
+              <div class="col-6" v-else>
+                <input
+                  id="picInput"
+                  v-model="picture"
+                  type="text"
+                  name="picInput"
+                  class="form-control"
+                  placeholder="Collez, ici, l'url de votre photo"
+                > 
+              </div>
+            </div>
           </div>
           <div class="card-text"></div>
           <input
@@ -92,6 +116,7 @@ export default {
       subject: null,
       tags: null,
       content: null,
+      picture: null,
     };
   },
   methods: {
@@ -109,6 +134,7 @@ export default {
           this.subject = message.subject;
           this.tags = message.tags;
           this.content = message.content;
+          this.picture = message.picture;
         })
         .catch(() => {
           console.log("error");
@@ -154,6 +180,7 @@ export default {
         subject: this.subject,
         tags: this.tags,
         content: this.content,
+        picture: this.picture,
         date: moment().format("DD/MM/YYYY hh:mm"),
       };
       axios
