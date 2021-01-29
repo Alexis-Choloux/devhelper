@@ -117,7 +117,7 @@ export default {
     getMessage() {
       axios
         .get(
-          "https://crudcrud.com/api/5b326cc2e0bc4b2abdffca8791049cc9/message/" +
+          "https://cors-anywhere.herokuapp.com/https://crudcrud.com/api/4143cd4d6ef14f8085d339535146d35b/message/" +
             this.id
         )
         .then((response) => {
@@ -130,7 +130,7 @@ export default {
     deletePost() {
       axios
         .delete(
-          "https://crudcrud.com/api/5b326cc2e0bc4b2abdffca8791049cc9/message/" +
+          "https://cors-anywhere.herokuapp.com/https://crudcrud.com/api/4143cd4d6ef14f8085d339535146d35b/message/" +
             this.message._id
         )
         .then(() => {

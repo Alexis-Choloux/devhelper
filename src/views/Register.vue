@@ -41,6 +41,7 @@ export default {
     async submit() {
       try {
         await this.Register(this.form);
+        console.log(this.form);
         this.$router.push('/');
         this.showError = false
       } catch (error) {

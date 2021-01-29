@@ -6,6 +6,7 @@ import Register from "@/views/Register.vue";
 import Login from "@/views/Login.vue";
 import store from "@/store";
 
+
 const routes = [
   {
     path: "/message/:id",
