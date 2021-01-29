@@ -1,5 +1,6 @@
 <template>
   <div class="container">
+      <NavBar />
     <div v-if="$route.path == '/'">
       <div class="row">
         <div class="col-md-3 text-center">
@@ -27,12 +28,14 @@
 import axios from "axios";
 import Form from "./components/Form.vue";
 import ShowMessages from "./components/ShowMessages.vue";
+import NavBar from "./components/NavBar.vue";
 
 export default {
   name: "App",
   components: {
     Form,
     ShowMessages,
+    NavBar
   },
   data() {
     return {
@@ -80,7 +83,8 @@ export default {
 .routerLink {
   text-decoration: none;
   color: black;
-}.routerLink:hover {
+}
+.routerLink:hover {
   color: black;
 }
 
